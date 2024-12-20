@@ -4,6 +4,7 @@ services:
     build:
       context: .
       args:
+        CACHEBUST: $(date +%s)
         REPO_URL: https://github.com/MikBark/gmton
         BRANCH: master
     container_name: master
