@@ -9,12 +9,14 @@ class ServiceConfig(BaseSettings):
     model_config = SettingsConfigDict(case_sensitive=False)
 
     post_url: str
+    transport_config: dict[str, Any] = {'retries': 3}
     token: str = Field(validation_alias='API_TOKEN')
 
     @computed_field
     def client_config(self) -> dict[str, Any]:
         return {
-            'headers': {'X-API-Key': self._token},
+            'headers': {'X-API-Key': self.token},
+            'trust_env': True,
         }
 
 

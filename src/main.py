@@ -1,4 +1,4 @@
-from httpx import Client
+import httpx
 
 from api import Api
 from config import logic_config, service_config
@@ -7,7 +7,13 @@ from logic import Logic
 
 if __name__ == '__main__':
     game = Game(
-        Api(Client(**service_config.client_config), service_config.post_url),
+        Api(
+            httpx.Client(
+                transport=httpx.HTTPTransport(**service_config.transport_config),
+                **service_config.client_config,
+            ),
+            service_config.post_url,
+        ),
         Logic(**logic_config),
     )
     game.play()

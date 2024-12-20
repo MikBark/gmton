@@ -1,13 +1,16 @@
 services:
 
-  kttz:
-    build: .
+  master:
+    build:
+      context: .
+      args:
+        REPO_URL: https://github.com/MikBark/gmton
+        BRANCH: master
+    container_name: master
     environment:
       API_TOKEN: ...
       POST_URL: ...
       HTTP_PROXY: ...
       HTTPS_PROXY: ...
     volumes:
-      - ./kttz-conf/:./conf
-    net:
-      - local
+      - ./conf/kttz.json:/app/conf/logic.json
