@@ -1,0 +1,13 @@
+services:
+
+  kttz:
+    build: .
+    environment:
+      API_TOKEN: ...
+      POST_URL: ...
+      HTTP_PROXY: ...
+      HTTPS_PROXY: ...
+    volumes:
+      - ./kttz-conf/:./conf
+    net:
+      - local
